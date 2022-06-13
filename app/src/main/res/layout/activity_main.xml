@@ -87,7 +87,7 @@
         android:ellipsize="end"
         android:linksClickable="true"
         android:singleLine="true"
-        android:text="@string/main_text_link"
+        tools:text="@string/main_text_link"
         app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainTextView"

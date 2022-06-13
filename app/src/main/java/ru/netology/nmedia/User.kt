@@ -5,11 +5,3 @@ class User(
 ) {
     val userId: Long = UserService.setUserId()
 }
-
-object UserService {
-    var userIdCounter: Long = 0
-    fun setUserId(): Long {
-        userIdCounter++
-        return userIdCounter
-    }
-}
