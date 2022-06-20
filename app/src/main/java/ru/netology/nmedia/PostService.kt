@@ -12,16 +12,16 @@ object PostService {
     private var postIdCounter: Long = 0
     fun setPostId(): Long = postIdCounter + 1L
 
-    fun Post.checkILikeItPost(user: User): Boolean {
-        return thoseWhoLikedIt.contains(user.userId)
-    }
+//    fun Post.checkILikeItPost(user: User): Boolean {
+//        return thoseWhoLikedIt.contains(user.userId)
+//    }
 
 
 
     @SuppressLint("SimpleDateFormat")
     fun Post.getSimpleDateFormat(): String {
         val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-        val date = Date(this.postDate)
+        val date = Date().time
         return dateFormatter.format(date)
     }
 
