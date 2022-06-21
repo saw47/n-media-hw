@@ -1,9 +1,9 @@
 package ru.netology.nmedia.data.impl
 
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.data.PostRepository
-
+import ru.netology.nmedia.data.service.Service
 
 class InMemoryPostRepository : PostRepository {
 
@@ -19,25 +19,32 @@ class InMemoryPostRepository : PostRepository {
         val initPosts = List(100) { index ->
             Post(
                 postId = index.toLong(),
-                authorName = "author $index",
+                authorName = "author number $index",
                 content = "post content number $index \n",
-                link = "$index.com",
-                iLikeIt = false
+                link = "website$index.com",
             )
         }
         data = MutableLiveData(initPosts)
     }
 
-
     override fun like(id: Long) {
         posts = posts.map { post ->
-            if (post.postId == id) post.copy(iLikeIt = !post.iLikeIt)
-            else post
+            if (post.postId == id) {
+                Service.addPostToFavoritesList(id)
+                post.copy(favoriteCounter = Service.likeCounter(id))
+            } else post
         }
     }
 
     override fun repost(id: Long) {
-        TODO("Not yet implemented")
+        posts = posts.map { post ->
+            if (post.postId == id) {
+                Service.repost(id)
+                post.copy(repostCounter = Service.repostCount(id))
+            } else{
+                post
+            }
+        }
     }
 
 

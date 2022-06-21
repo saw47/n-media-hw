@@ -5,21 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import ru.netology.nmedia.PostService.getSimpleDateFormat
 import ru.netology.nmedia.data.impl.PostAdapter
-import ru.netology.nmedia.data.impl.TemporaryObjects
+import ru.netology.nmedia.data.service.Service
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
 
+
     private val viewModel by viewModels<PostViewModel>()
 
-    val adapter = PostAdapter(
-            likeClicked = { id ->
-            viewModel.onLikeClick(id)
-        }
+    private val adapter = PostAdapter(
+            likeClicked = { id -> viewModel.onLikeClick(id)},
+            repostClicked = {id -> viewModel.onRepostClick(id)}
     )
 
     @RequiresApi(Build.VERSION_CODES.N)

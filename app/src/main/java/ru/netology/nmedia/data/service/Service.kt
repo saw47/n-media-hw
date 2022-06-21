@@ -1,28 +1,41 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.data.service
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
+import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.data.User
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.floor
 
-object PostService {
+object Service {
 
-    private var postIdCounter: Long = 0
-    fun setPostId(): Long = postIdCounter + 1L
+    private val likedPostsRepo: MutableMap<Long, MutableSet<Long>> = mutableMapOf()
+    private val repostCounter: MutableList<Long> = mutableListOf()
 
-//    fun Post.checkILikeItPost(user: User): Boolean {
-//        return thoseWhoLikedIt.contains(user.userId)
-//    }
+    private val user = User(
+        userId = 1L,
+        userName = "Random User"
+    )
 
+    fun repost(postId: Long) = repostCounter.add(postId)
+    fun repostCount(postId: Long) = repostCounter.filter { it == postId }.size
 
+    fun fillPostFavoriteList(postId: Long): Boolean {
+        likedPostsRepo[postId] = mutableSetOf()
+        return likedPostsRepo.containsKey(postId)
+    }
+    fun likeCounter(postId: Long) = likedPostsRepo[postId]!!.size
+
+    fun addPostToFavoritesList(postId: Long) =
+        if (!likedPostsRepo[postId]!!.contains(user.userId)) {
+            likedPostsRepo[postId]!!.add(user.userId)
+        } else {
+            likedPostsRepo[postId]!!.remove(user.userId)
+        }
 
     @SuppressLint("SimpleDateFormat")
     fun Post.getSimpleDateFormat(): String {
-        val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-        val date = Date().time
-        return dateFormatter.format(date)
+        return SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date())
     }
 
     fun peopleCounter(quantity: Int): String {
