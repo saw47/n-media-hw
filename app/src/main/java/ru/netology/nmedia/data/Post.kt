@@ -1,6 +1,6 @@
 package ru.netology.nmedia.data
 
-import ru.netology.nmedia.data.service.Service
+import ru.netology.nmedia.util.Service
 
 data class Post(
     val postId: Long = 0,

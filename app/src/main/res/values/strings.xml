@@ -3,4 +3,12 @@
     <string name="app_name">Nmedia</string>
     <string name="post_author_avatar">Post author avatar</string>
     <string name="main_text_link">https://tessssstlink.ua/</string>
+    <string name="remove">Удалить</string>
+    <string name="postText">enter text</string>
+    <string name="description">save</string>
+<string name="toolsText">
+
+    </string>
+    <string name="edit">Редактировать</string>
+
 </resources>
