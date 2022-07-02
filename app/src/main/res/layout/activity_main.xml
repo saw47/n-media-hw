@@ -2,169 +2,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/common_spacing"
-    tools:context=".MainActivity">
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:context=".MainActivity"
+    tools:listitem="@layout/post">
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/topBarrier"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postsRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="authorNameTextView, postAvatarImageView, postDateTextView, optionsButton" />
-
-
-    <ImageView
-        android:id="@+id/postAvatarImageView"
-        android:layout_width="@dimen/post_avatar_spacing"
-        android:layout_height="@dimen/post_avatar_spacing"
-        android:contentDescription="@string/post_author_avatar"
-        android:src="@drawable/ic_baseline_face_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/authorNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginEnd="@dimen/common_spacing"
-        android:ellipsize="end"
-        android:singleLine="true"
-        tools:text="Иванов Иван Иванович"
-        app:layout_constraintBottom_toTopOf="@id/postDateTextView"
-        app:layout_constraintEnd_toStartOf="@id/optionsButton"
-        app:layout_constraintStart_toEndOf="@id/postAvatarImageView"
-        app:layout_constraintTop_toTopOf="@id/postAvatarImageView"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/postDateTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginEnd="@dimen/common_spacing"
-        android:ellipsize="end"
-        android:singleLine="true"
-        tools:text="33.21.3052"
-        app:layout_constraintEnd_toStartOf="@id/optionsButton"
-        app:layout_constraintStart_toEndOf="@id/postAvatarImageView"
-        app:layout_constraintTop_toBottomOf="@id/authorNameTextView" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/optionsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/tools_barrier"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/postAvatarImageView" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571"
+        tools:listitem="@layout/post">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/headerBarrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="authorNameTextView, postAvatarImageView, postDateTextView, optionsButton" />
-
-    <android.widget.TextView
-        android:id="@+id/mainTextView"
+        android:id="@+id/tools_barrier"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="textContent">
+
+    </androidx.constraintlayout.widget.Barrier>
+
+    <EditText
+        android:id="@+id/textContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/postText"
+        android:inputType="textMultiLine"
+        android:background="@android:color/transparent"
+        android:padding="@dimen/common_spacing"
+        android:importantForAutofill="no"
+        app:layout_constraintTop_toTopOf="@+id/tools_barrier"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/saveButton"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </EditText>
+
+    <ImageButton
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        tools:text = "@tools:sample/lorem/random"
-        app:layout_constraintBottom_toTopOf="@id/mainTextLink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBarrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/mainTextLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:ellipsize="end"
-        android:linksClickable="true"
-        android:singleLine="true"
-        tools:text="@string/main_text_link"
-        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainTextView"
-        android:layout_marginBottom="@dimen/common_spacing"/>
-
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/bottomBarrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="likesButton, likesCount,shareButton,shareCount,viewButton,viewCount" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/likesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_favorite_border_16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/likesCount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/likesCount"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        tools:text="100500"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/shareButton"
-        app:layout_constraintStart_toEndOf="@id/likesButton" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/shareButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/bottom_pict_spacing"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_share_16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/likesCount"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/shareCount"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        tools:text="42"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shareButton" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/viewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/bottom_pict_spacing"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_remove_red_eye_16"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/viewButton"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/viewCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="-20"
-        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/textContent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/viewButton" />
+        app:srcCompat = "@android:drawable/ic_menu_save"
+        />
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
