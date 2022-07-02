@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/common_spacing"
-    >
+    android:padding="@dimen/common_spacing">
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/topBarrier"
@@ -32,12 +31,12 @@
         android:layout_marginEnd="@dimen/common_spacing"
         android:ellipsize="end"
         android:singleLine="true"
-        tools:text="Иванов Иван Иванович"
         app:layout_constraintBottom_toTopOf="@id/postDateTextView"
         app:layout_constraintEnd_toStartOf="@id/optionsButton"
         app:layout_constraintStart_toEndOf="@id/postAvatarImageView"
         app:layout_constraintTop_toTopOf="@id/postAvatarImageView"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Иванов Иван Иванович" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/postDateTextView"
@@ -47,10 +46,10 @@
         android:layout_marginEnd="@dimen/common_spacing"
         android:ellipsize="end"
         android:singleLine="true"
-        tools:text="33.21.3052"
         app:layout_constraintEnd_toStartOf="@id/optionsButton"
         app:layout_constraintStart_toEndOf="@id/postAvatarImageView"
-        app:layout_constraintTop_toBottomOf="@id/authorNameTextView" />
+        app:layout_constraintTop_toBottomOf="@id/authorNameTextView"
+        tools:text="33.21.3052" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/optionsButton"
@@ -70,28 +69,35 @@
 
     <android.widget.TextView
         android:id="@+id/mainTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        tools:text = "@tools:sample/lorem/random"
         app:layout_constraintBottom_toTopOf="@id/mainTextLink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBarrier" />
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
+        tools:text="В дверной глазок — в замочную щель\n
+Гениальные мыслишки — мировые войнушки\n
+Неофициальные пупы земли\n
+Эмалированные части головных систем\n
+Инстинктивные добровольцы\n
+Во имя вселенной и хлебной корочки\n
+Люди с большой буквы\n
+Слово «люди» пишется с большой буквы\n" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/mainTextLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/common_spacing"
         android:autoLink="web"
         android:ellipsize="end"
         android:linksClickable="true"
         android:singleLine="true"
-        tools:text="@string/main_text_link"
         app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainTextView"
-        android:layout_marginBottom="@dimen/common_spacing"/>
+        tools:text="@string/main_text_link" />
 
 
     <androidx.constraintlayout.widget.Barrier
@@ -106,23 +112,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_baseline_favorite_border_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/likesCount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-        android:clickable="true"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/likesCount"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        tools:text="100500"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/shareButton"
-        app:layout_constraintStart_toEndOf="@id/likesButton" />
+        app:layout_constraintStart_toEndOf="@id/likesButton"
+        tools:text="100500" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/shareButton"
@@ -139,10 +145,10 @@
         android:id="@+id/shareCount"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        tools:text="42"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shareButton" />
+        app:layout_constraintStart_toEndOf="@id/shareButton"
+        tools:text="42" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/viewButton"
@@ -160,11 +166,11 @@
         android:id="@+id/viewCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="-20"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/viewButton" />
+        app:layout_constraintStart_toEndOf="@id/viewButton"
+        tools:text="-20" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
