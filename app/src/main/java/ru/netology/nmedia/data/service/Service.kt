@@ -1,44 +1,41 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.data.service
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
+import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.data.User
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.floor
 
-object PostService {
+object Service {
 
-    private var postIdCounter: Long = 0
+    private val likedPostsRepo: MutableMap<Long, MutableSet<Long>> = mutableMapOf()
+    private val repostCounter: MutableList<Long> = mutableListOf()
 
-    fun setPostId(): Long {
-        return postIdCounter + 1L
+    private val user = User(
+        userId = 1L,
+        userName = "Random User"
+    )
+
+    fun repost(postId: Long) = repostCounter.add(postId)
+    fun repostCount(postId: Long) = repostCounter.filter { it == postId }.size
+
+    fun fillPostFavoriteList(postId: Long): Boolean {
+        likedPostsRepo[postId] = mutableSetOf()
+        return likedPostsRepo.containsKey(postId)
     }
+    fun likeCounter(postId: Long) = likedPostsRepo[postId]!!.size
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun Post.likePost(user: User) {
-        if (!this.checkILikeItPost(user)) {
-            this.thoseWhoLikedIt.add(user.userId)
+    fun addPostToFavoritesList(postId: Long) =
+        if (!likedPostsRepo[postId]!!.contains(user.userId)) {
+            likedPostsRepo[postId]!!.add(user.userId)
         } else {
-            this.thoseWhoLikedIt.remove(user.userId)
+            likedPostsRepo[postId]!!.remove(user.userId)
         }
-        likeCounter = thoseWhoLikedIt.size
-    }
-
-    fun Post.checkILikeItPost(user: User): Boolean {
-        return thoseWhoLikedIt.contains(user.userId)
-    }
 
     @SuppressLint("SimpleDateFormat")
     fun Post.getSimpleDateFormat(): String {
-        val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-        val date = Date(this.postDate)
-        return dateFormatter.format(date)
-    }
-
-    fun Post.sharePost(user: User) {
-        this.thoseWhoShareIt.add(user.userId)
-        shareCounter = thoseWhoShareIt.size
+        return SimpleDateFormat("yyyy-MM-dd HH:mm").format(Date())
     }
 
     fun peopleCounter(quantity: Int): String {
