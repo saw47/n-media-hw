@@ -8,6 +8,12 @@ import ru.netology.nmedia.util.Service
 class InMemoryPostRepository : PostRepository {
 
     private var postCounter = GENERATED_POSTS_AMOUNT.toLong()
+    //service
+    var initPostsQ = emptyList<Post>()
+    override fun size(): Int {
+        return initPostsQ.size
+    }
+    //service
 
     private var posts
         get() = checkNotNull(data.value)
@@ -27,7 +33,9 @@ class InMemoryPostRepository : PostRepository {
             )
         }
         data = MutableLiveData(initPosts)
+        initPostsQ = initPosts
     }
+
 
     override fun like(id: Long) {
         posts = posts.map { post ->
@@ -51,6 +59,10 @@ class InMemoryPostRepository : PostRepository {
 
     override fun delete(id: Long) {
         data.value = posts.filterNot { id == it.postId }
+        //service
+        println("LIVEDATA AFTER DELETE ${data.value?.size}")
+        //service
+
     }
 
     override fun save(post: Post) {
@@ -79,6 +91,4 @@ class InMemoryPostRepository : PostRepository {
     companion object {
         const val GENERATED_POSTS_AMOUNT = 1000
     }
-
-
 }

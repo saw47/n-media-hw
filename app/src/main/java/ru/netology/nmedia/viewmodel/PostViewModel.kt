@@ -36,7 +36,13 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     override fun onRepostClick(id: Long) = repository.repost(id)
 
-    override fun onRemoveClick(id: Long) = repository.delete(id)
+    override fun onRemoveClick(id: Long) {
+        repository.delete(id)
+        //service
+        println("SIZE REAL")
+        println(repository.size())
+        //service
+    }
 
     override fun onEditClick(post: Post) {
         currentPost.value = post
