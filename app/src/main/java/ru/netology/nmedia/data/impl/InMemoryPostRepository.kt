@@ -68,21 +68,12 @@ class InMemoryPostRepository : PostRepository {
                 authorName = post.authorName
             )
         ) + posts
-
-
-        println("SAVE")
-        println(id)
-        println(post.postId)
-        println(post.content)
     }
 
     private fun update(post: Post) {
         data.value = posts.map {
             if(it.postId == post.postId) post else it
         }
-        println("UPD")
-        println(post.postId)
-        println(post.content)
     }
 
     companion object {

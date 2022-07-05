@@ -16,11 +16,12 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/tools_barrier"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/post">
+
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.Barrier
@@ -32,19 +33,56 @@
 
     </androidx.constraintlayout.widget.Barrier>
 
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="postNameToEdit, cancelButton"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/postNameToEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_spacing"
+        app:layout_constraintBottom_toTopOf="@id/tools_barrier"
+        app:layout_constraintEnd_toStartOf="@id/cancelButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postsRecyclerView"
+        tools:text="text-TEXT-text">
+    </TextView>
+
+    <ImageButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@id/tools_barrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/postNameToEdit"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+
     <EditText
         android:id="@+id/textContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/postText"
-        android:inputType="textMultiLine"
         android:background="@android:color/transparent"
-        android:padding="@dimen/common_spacing"
+        android:hint="@string/postText"
         android:importantForAutofill="no"
-        app:layout_constraintTop_toTopOf="@+id/tools_barrier"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/common_spacing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tools_barrier">
 
     </EditText>
 
@@ -52,18 +90,16 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:contentDescription="@string/description"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textContent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat = "@android:drawable/ic_menu_save"
-        />
-
-
-
-
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

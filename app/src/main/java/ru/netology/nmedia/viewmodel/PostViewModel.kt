@@ -16,6 +16,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val currentPost = MutableLiveData<Post?>(null)
 
 
+
+
     fun onSaveButtonClicked(content: String) {
         if(content.isBlank()) return
 
@@ -26,7 +28,6 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             authorName = "New Post Author",
             content = content
         )
-
         repository.save(post)
         currentPost.value = null
     }
@@ -39,5 +40,9 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     override fun onEditClick(post: Post) {
         currentPost.value = post
+    }
+
+    override fun onCancelClick() {
+        currentPost.value = null
     }
 }

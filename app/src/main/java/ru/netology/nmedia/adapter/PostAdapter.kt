@@ -82,9 +82,12 @@ class PostAdapter(
                     }
                 )
                 optionsButton.setOnClickListener{popupMenu.show()}
+
             }
         }
+
     }
+
 
     private object DiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {

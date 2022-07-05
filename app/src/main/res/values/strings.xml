@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nmedia</string>
-    <string name="post_author_avatar">Post author avatar</string>
-    <string name="main_text_link">https://tessssstlink.ua/</string>
-    <string name="remove">Удалить</string>
-    <string name="postText">enter text</string>
-    <string name="description">save</string>
-<string name="toolsText">
-
-    </string>
-    <string name="edit">Редактировать</string>
+    <string name="app_name" translatable="false">Nmedia</string>
+    <string name="post_author_avatar" translatable="false">Post author avatar</string>
+    <string name="main_text_link" translatable="false">https://tessssstlink.ua/</string>
+    <string name="remove" translatable="false">Delete</string>
+    <string name="postText" translatable="false">enter text</string>
+    <string name="description" translatable="false">save</string>
+    <string name="toolsText" translatable="false">enter text</string>
+    <string name="edit">Edit</string>
+    <string name="cancel" translatable="false">Cancel</string>
 
 </resources>

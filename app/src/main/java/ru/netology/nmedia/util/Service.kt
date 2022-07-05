@@ -2,7 +2,6 @@ package ru.netology.nmedia.util
 
 import android.annotation.SuppressLint
 import ru.netology.nmedia.data.Post
-import ru.netology.nmedia.data.User
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.floor
