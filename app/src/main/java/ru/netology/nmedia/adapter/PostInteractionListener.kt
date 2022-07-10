@@ -7,4 +7,5 @@ interface PostInteractionListener {
     fun onRepostClick(id: Long)
     fun onRemoveClick(id: Long)
     fun onEditClick(post: Post)
+    fun onCancelClick()
 }

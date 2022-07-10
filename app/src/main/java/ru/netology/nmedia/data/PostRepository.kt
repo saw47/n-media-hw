@@ -8,6 +8,7 @@ interface PostRepository {
     fun repost(id: Long)
     fun delete(id: Long)
     fun save(post: Post)
+    fun size(): Int
 
     companion object {
         const val NEW_POST_ID = -1L

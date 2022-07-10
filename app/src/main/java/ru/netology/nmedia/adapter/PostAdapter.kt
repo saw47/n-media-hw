@@ -72,19 +72,26 @@ class PostAdapter(
                 mainTextView.text = post.content
                 postDateTextView.text = post.getSimpleDateFormat()
                 shareCount.text = Service.peopleCounter(post.repostCounter)
-                likesCount.text = Service.peopleCounter(post.favoriteCounter)
+
+                likesButton.text = Service.peopleCounter(post.favoriteCounter)
+
                 mainTextLink.text = post.link ?: ""
-                likesButton.setImageResource(
-                    if (Service.likeCounter(post.postId) >= 1) {
-                        R.drawable.ic_baseline_favorite_16dp
-                    } else {
-                        R.drawable.ic_baseline_favorite_border_16
-                    }
-                )
+                likesButton.isChecked = Service.likeCounter(post.postId) >= 1
+
+//                likesButton.setButtonDrawable(
+//                    if (Service.likeCounter(post.postId) >= 1) {
+//                        R.drawable.ic_baseline_favorite_16dp
+//                    } else {
+//                        R.drawable.ic_baseline_favorite_border_16
+//                    }
+//                )
                 optionsButton.setOnClickListener{popupMenu.show()}
+
             }
         }
+
     }
+
 
     private object DiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
