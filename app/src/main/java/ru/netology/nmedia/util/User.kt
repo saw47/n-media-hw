@@ -1,4 +1,4 @@
-package ru.netology.nmedia.data
+package ru.netology.nmedia.util
 
 data class User(
     val userId: Long,
