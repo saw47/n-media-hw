@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (content != null) {
                     group.visibility = View.VISIBLE
-                    postNameToEdit.text = author
+                    postNameToEdit.text = content
                     textContent.requestFocus()
                     textContent.showKeyboard()
                 } else {

@@ -9,5 +9,6 @@
     <string name="toolsText" translatable="false">enter text</string>
     <string name="edit">Edit</string>
     <string name="cancel" translatable="false">Cancel</string>
+    <string name="like" translatable="false">Like</string>
 
 </resources>
