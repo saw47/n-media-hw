@@ -10,17 +10,11 @@ import ru.netology.nmedia.data.impl.InMemoryPostRepository
 class PostViewModel : ViewModel(), PostInteractionListener {
 
     private val repository: PostRepository = InMemoryPostRepository()
-
     val data get() = repository.data
-
     val currentPost = MutableLiveData<Post?>(null)
-
-
-
 
     fun onSaveButtonClicked(content: String) {
         if(content.isBlank()) return
-
         val post = currentPost.value?.copy(
             content = content
         ) ?: Post(
@@ -38,10 +32,6 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     override fun onRemoveClick(id: Long) {
         repository.delete(id)
-        //service
-        println("SIZE REAL")
-        println(repository.size())
-        //service
     }
 
     override fun onEditClick(post: Post) {

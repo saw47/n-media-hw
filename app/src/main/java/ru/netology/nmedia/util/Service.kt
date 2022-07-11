@@ -10,6 +10,7 @@ object Service {
 
     private val likedPostsRepo: MutableMap<Long, MutableSet<Long>> = mutableMapOf()
     private val repostCounter: MutableList<Long> = mutableListOf()
+    private val viewCounter: MutableList<Long> = mutableListOf()
 
     private val user = User(
         userId = 1L,
@@ -19,6 +20,9 @@ object Service {
     fun repost(postId: Long) = repostCounter.add(postId)
     fun repostCount(postId: Long) = repostCounter.filter { it == postId }.size
 
+    fun setAsView(postId: Long) = viewCounter.add(postId)
+    fun viewCount(postId: Long) = viewCounter.filter { it == postId }.size
+
     fun fillPostFavoriteList(postId: Long): Boolean {
         likedPostsRepo[postId] = mutableSetOf()
         return likedPostsRepo.containsKey(postId)
@@ -27,7 +31,6 @@ object Service {
 
 
     fun likeCounter(postId: Long): Int {
-       println("ID $postId")
        return likedPostsRepo[postId]!!.size
     }
 
