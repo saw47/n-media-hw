@@ -10,5 +10,7 @@
     <string name="edit">Edit</string>
     <string name="cancel" translatable="false">Cancel</string>
     <string name="like" translatable="false">Like</string>
+    <string name="share" translatable="false">Share</string>
+    <string name="Menu">menu</string>
 
 </resources>

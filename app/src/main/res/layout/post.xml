@@ -21,6 +21,8 @@
         android:contentDescription="@string/post_author_avatar"
         android:src="@drawable/ic_baseline_face_24"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/headerBarrier"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -34,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/postDateTextView"
         app:layout_constraintEnd_toStartOf="@id/optionsButton"
         app:layout_constraintStart_toEndOf="@id/postAvatarImageView"
-        app:layout_constraintTop_toTopOf="@id/postAvatarImageView"
+        app:layout_constraintTop_toTopOf="@id/topBarrier"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Иванов Иван Иванович" />
 
@@ -51,14 +53,18 @@
         app:layout_constraintTop_toBottomOf="@id/authorNameTextView"
         tools:text="33.21.3052" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/optionsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppTheme.ButtonMenu"
+        android:layout_width="@dimen/post_avatar_spacing"
+        android:layout_height="@dimen/post_avatar_spacing"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:checkable="true"
+        android:contentDescription="@string/Menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/postAvatarImageView" />
+        app:layout_constraintTop_toTopOf="@id/postAvatarImageView">
+    </com.google.android.material.button.MaterialButton>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/headerBarrier"
@@ -105,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="likesButton,shareButton,shareCount,viewButton,viewCount" />
+        app:constraint_referenced_ids="likesButton,shareButton,viewButton,viewCount" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -121,32 +127,27 @@
         app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
         tools:text="100500">
 
+    </com.google.android.material.button.MaterialButton>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shareButton"
+        style="@style/Widget.AppTheme.ButtonShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        android:contentDescription="@string/share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/likesButton"
+        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
+        tools:text="42">
+
 
     </com.google.android.material.button.MaterialButton>
 
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/shareButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/bottom_pict_spacing"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_share_16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/likesButton"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/shareCount"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shareButton"
-        tools:text="42" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/viewButton"
+        style="@style/Widget.AppTheme.ButtonShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/bottom_pict_spacing"
@@ -161,11 +162,13 @@
         android:id="@+id/viewCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/viewButton"
-        tools:text="-20" />
+        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
+        tools:text="20" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

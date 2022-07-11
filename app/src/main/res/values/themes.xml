@@ -21,8 +21,19 @@
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
-    <style name="Widget.AppTheme.LikeCheckbox_" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="buttonTint">@color/like_checkbox_tint</item>
+    <style name="Widget.AppTheme.ButtonShare" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+    <item name="iconTint">@color/common_buttons_color</item>
+    <item name="icon">@drawable/ic_baseline_share_black_16dp</item>
+    <item name="android:minWidth">@dimen/icon_button_min_size</item>
+    <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
+
+    <style name="Widget.AppTheme.ButtonMenu" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/common_buttons_color</item>
+        <item name="icon">@drawable/ic_menu_variable_dp</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+    </style>
+
 
 </resources>

@@ -59,10 +59,6 @@ class InMemoryPostRepository : PostRepository {
 
     override fun delete(id: Long) {
         data.value = posts.filterNot { id == it.postId }
-        //service
-        println("LIVEDATA AFTER DELETE ${data.value?.size}")
-        //service
-
     }
 
     override fun save(post: Post) {

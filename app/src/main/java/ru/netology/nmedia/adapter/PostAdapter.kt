@@ -3,6 +3,8 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.children
+import androidx.core.view.isNotEmpty
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +16,6 @@ import ru.netology.nmedia.databinding.PostBinding
 
 class PostAdapter(
     private val interactionListener: PostInteractionListener
-    //private val likeClicked: (Long) -> Unit,
-    //private val repostClicked: (Long) -> Unit
 ) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +26,7 @@ class PostAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = getItem(position)
+        Service.setAsView(post.postId)
         holder.bind(post)
     }
 
@@ -39,20 +40,18 @@ class PostAdapter(
         private val popupMenu by lazy {
             PopupMenu(itemView.context, binding.optionsButton).apply {
                 inflate(R.menu.options_post)
+
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.remove -> {
                             listener.onRemoveClick(post.postId)
                             true
                         }
-
                         R.id.edit -> {
                             listener.onEditClick(post)
                             true
                         }
-
                         else -> false
-
                     }
                 }
             }
@@ -61,35 +60,29 @@ class PostAdapter(
         init {
             binding.likesButton.setOnClickListener { listener.onLikeClick(post.postId) }
             binding.shareButton.setOnClickListener { listener.onRepostClick(post.postId)}
+            binding.optionsButton.setOnClickListener{
+                popupMenu.show()
+                binding.optionsButton.isChecked = true
+            }
+            popupMenu.setOnDismissListener(){
+                binding.optionsButton.isChecked = false
+            }
         }
-
 
         fun bind(post: Post) {
             this.post = post
-
             with(binding) {
                 authorNameTextView.text = post.authorName
                 mainTextView.text = post.content
                 postDateTextView.text = post.getSimpleDateFormat()
-                shareCount.text = Service.peopleCounter(post.repostCounter)
-
+                shareButton.text = Service.peopleCounter(post.repostCounter)
                 likesButton.text = Service.peopleCounter(post.favoriteCounter)
-
                 mainTextLink.text = post.link ?: ""
+                viewCount.text = Service.peopleCounter(Service.viewCount(post.postId))
                 likesButton.isChecked = Service.likeCounter(post.postId) >= 1
-
-//                likesButton.setButtonDrawable(
-//                    if (Service.likeCounter(post.postId) >= 1) {
-//                        R.drawable.ic_baseline_favorite_16dp
-//                    } else {
-//                        R.drawable.ic_baseline_favorite_border_16
-//                    }
-//                )
-                optionsButton.setOnClickListener{popupMenu.show()}
-
+                shareButton.isChecked = Service.repostCount(post.postId) >= 1
             }
         }
-
     }
 
 

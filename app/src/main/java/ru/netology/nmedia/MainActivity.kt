@@ -22,18 +22,16 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         val adapter = PostAdapter(viewModel)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
         binding.postsRecyclerView.adapter = adapter
 
-        binding.saveButton.setOnClickListener{
+        binding.saveButton.setOnClickListener {
             with(binding.textContent) {
                 val content = text.toString()
                 viewModel.onSaveButtonClicked(content)
@@ -42,21 +40,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.cancelButton.setOnClickListener{
+        binding.cancelButton.setOnClickListener {
             viewModel.onCancelClick()
             binding.textContent.clearFocus()
             binding.textContent.hideKeyboard()
         }
 
-
         viewModel.data.observe(this) { posts ->
-           adapter.submitList(posts)
+            adapter.submitList(posts)
         }
 
-
-        viewModel.currentPost.observe(this){ currentPost ->
+        viewModel.currentPost.observe(this) { currentPost ->
             with(binding) {
-
                 val content = currentPost?.content
                 val author = currentPost?.authorName
                 textContent.setText(content)
