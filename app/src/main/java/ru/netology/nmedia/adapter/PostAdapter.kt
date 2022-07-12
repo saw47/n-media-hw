@@ -59,7 +59,7 @@ class PostAdapter(
 
         init {
             binding.likesButton.setOnClickListener { listener.onLikeClick(post.postId) }
-            binding.shareButton.setOnClickListener { listener.onRepostClick(post.postId)}
+            binding.shareButton.setOnClickListener { listener.onRepostClick(post)}
             binding.optionsButton.setOnClickListener{
                 popupMenu.show()
                 binding.optionsButton.isChecked = true
