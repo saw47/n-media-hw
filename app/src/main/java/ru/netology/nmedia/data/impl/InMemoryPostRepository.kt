@@ -3,17 +3,14 @@ package ru.netology.nmedia.data.impl
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.data.PostRepository
+import ru.netology.nmedia.data.impl.InMemoryPostRepository.posts
 import ru.netology.nmedia.util.Service
 
-class InMemoryPostRepository : PostRepository {
+object InMemoryPostRepository : PostRepository {
+
+    private const val GENERATED_POSTS_AMOUNT = 1000
 
     private var postCounter = GENERATED_POSTS_AMOUNT.toLong()
-    //service
-    var initPostsQ = emptyList<Post>()
-    override fun size(): Int {
-        return initPostsQ.size
-    }
-    //service
 
     private var posts
         get() = checkNotNull(data.value)
@@ -33,9 +30,9 @@ class InMemoryPostRepository : PostRepository {
             )
         }
         data = MutableLiveData(initPosts)
-        initPostsQ = initPosts
     }
 
+    var tempPost:Post? = null
 
     override fun like(id: Long) {
         posts = posts.map { post ->
@@ -61,30 +58,22 @@ class InMemoryPostRepository : PostRepository {
         data.value = posts.filterNot { id == it.postId }
     }
 
-    override fun save(post: Post) {
-        if (post.postId == PostRepository.NEW_POST_ID) insert(post) else update(post)
-
-    }
-
-    private fun insert(post: Post) {
-        val id = ++postCounter
-        Service.fillPostFavoriteList(id)
-        data.value = listOf(
-            post.copy(
-                postId = id,
-                content = post.content,
-                authorName = post.authorName
-            )
-        ) + posts
-    }
-
-    private fun update(post: Post) {
-        data.value = posts.map {
-            if(it.postId == post.postId) post else it
+    override fun insert(content: String) {
+        if (tempPost == null){
+            val id = ++postCounter
+            Service.fillPostFavoriteList(id)
+            data.value = listOf(
+                Post(
+                    postId = id,
+                    content = content,
+                    authorName = "new author"
+                )
+            ) + posts
+        } else {
+            data.value = posts.map {
+                if (it.postId == tempPost!!.postId) tempPost!!.copy(content = content) else it
+            }
+            tempPost = null
         }
-    }
-
-    companion object {
-        const val GENERATED_POSTS_AMOUNT = 1000
     }
 }

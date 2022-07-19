@@ -1,14 +1,17 @@
 package ru.netology.nmedia.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.children
 import androidx.core.view.isNotEmpty
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.util.Service
 import ru.netology.nmedia.util.Service.getSimpleDateFormat
@@ -49,6 +52,7 @@ class PostAdapter(
                         }
                         R.id.edit -> {
                             listener.onEditClick(post)
+
                             true
                         }
                         else -> false

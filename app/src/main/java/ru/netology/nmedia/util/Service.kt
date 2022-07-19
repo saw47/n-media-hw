@@ -2,11 +2,13 @@ package ru.netology.nmedia.util
 
 import android.annotation.SuppressLint
 import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.data.impl.InMemoryPostRepository
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.floor
 
 object Service {
+
 
     private val likedPostsRepo: MutableMap<Long, MutableSet<Long>> = mutableMapOf()
     private val repostCounter: MutableList<Long> = mutableListOf()
