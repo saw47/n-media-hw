@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 action = ACTION_VIEW
                 setData(Uri.parse(video))
                 // TODO type = "video" это почему-то не работает :(
-                //  с video/* тоже не работает, открывает фото
+                //  с video/* тоже не работает, открывает фото.
             }
             val videoIntent = Intent.createChooser(intent, null)
             startActivity(videoIntent)
