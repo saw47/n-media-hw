@@ -26,7 +26,8 @@
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_48">
+        app:srcCompat="@drawable/ic_baseline_add_48"
+        android:contentDescription="TODO">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

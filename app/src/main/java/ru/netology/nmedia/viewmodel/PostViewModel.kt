@@ -13,6 +13,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val data get() = InMemoryPostRepository.data
     val shareContent = SingleLiveEvent<String>()
+    val urlContent = SingleLiveEvent<String?>()
     val editPost = SingleLiveEvent<Post>()
 
     fun onSaveButtonClicked(newContent: String) {
@@ -34,5 +35,9 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onEditClick(post: Post) {
         InMemoryPostRepository.tempPost = post
         editPost.value = post
+    }
+
+    override fun onVideoLinkClicked(post: Post) {
+        urlContent.value = post.video
     }
 }

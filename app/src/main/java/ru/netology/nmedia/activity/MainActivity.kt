@@ -1,8 +1,11 @@
 package ru.netology.nmedia.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +25,7 @@ import ru.netology.nmedia.activity.PostContentActivity
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<PostViewModel>()
 
+    @SuppressLint("IntentReset")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,18 @@ class MainActivity : AppCompatActivity() {
 
             val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
             startActivity(shareIntent)
+        }
+
+        viewModel.urlContent.observe(this) {video ->
+            if(video.isNullOrBlank()) return@observe
+            val intent = Intent().apply {
+                action = ACTION_VIEW
+                setData(Uri.parse(video))
+                // TODO type = "video" это почему-то не работает :(
+                //  с video/* тоже не работает, открывает фото
+            }
+            val videoIntent = Intent.createChooser(intent, null)
+            startActivity(videoIntent)
         }
 
         viewModel.editPost.observe(this) { post ->

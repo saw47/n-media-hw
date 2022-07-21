@@ -26,15 +26,28 @@
         >
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_gravity="bottom|right"
+        android:text="@string/cancel"
+        app:icon="@drawable/ic_baseline_cancel_36"
+        tools:ignore="RtlHardcoded">
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/description_post_save"
-        app:srcCompat="@drawable/ic_baseline_done_outline_24"
-        app:layout_anchor="@id/bottomAppBar"
+        android:layout_margin="4dp"
+        android:layout_gravity="bottom|left"
+        android:text="@string/description_post_save"
+        app:icon="@drawable/ic_baseline_done_outline_24"
+        tools:ignore="RtlHardcoded"
         >
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

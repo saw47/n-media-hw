@@ -31,9 +31,9 @@ class PostContentActivity: AppCompatActivity() {
         binding.edit.requestFocus()
 
         binding.ok.setOnClickListener() {
+            println("ok clicked")
             val intent = Intent()
             val text = binding.edit.text
-
             if (text.isNullOrBlank()) {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {
@@ -44,6 +44,14 @@ class PostContentActivity: AppCompatActivity() {
             }
             finish()
         }
+
+        binding.cancel.setOnClickListener() {
+            println("cancel clicked")
+            binding.edit.text.clear()
+            binding.edit.clearFocus()
+            finish()
+        }
+
     }
 
     object ResultContract : ActivityResultContract<Unit, String?>() {

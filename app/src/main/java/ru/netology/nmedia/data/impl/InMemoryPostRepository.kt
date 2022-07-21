@@ -29,10 +29,14 @@ object InMemoryPostRepository : PostRepository {
                 link = "website$index.com",
             )
         }
+        initPosts[1].video = "https://www.youtube.com/watch?v=NghsA5B2yac"
+        initPosts[3].video = "https://www.youtube.com/watch?v=NghsA5B2yac"
+        initPosts[5].video = "https://www.youtube.com/watch?v=NghsA5B2yac"
         data = MutableLiveData(initPosts)
     }
 
-    var tempPost:Post? = null
+
+    var tempPost: Post? = null
 
     override fun like(id: Long) {
         posts = posts.map { post ->
@@ -59,7 +63,7 @@ object InMemoryPostRepository : PostRepository {
     }
 
     override fun insert(content: String) {
-        if (tempPost == null){
+        if (tempPost == null) {
             val id = ++postCounter
             Service.fillPostFavoriteList(id)
             data.value = listOf(

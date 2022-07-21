@@ -1,17 +1,13 @@
 package ru.netology.nmedia.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.children
-import androidx.core.view.isNotEmpty
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.data.Post
 import ru.netology.nmedia.util.Service
 import ru.netology.nmedia.util.Service.getSimpleDateFormat
@@ -62,15 +58,26 @@ class PostAdapter(
         }
 
         init {
-            binding.likesButton.setOnClickListener { listener.onLikeClick(post.postId) }
-            binding.shareButton.setOnClickListener { listener.onRepostClick(post)}
-            binding.optionsButton.setOnClickListener{
+            binding.likesButton.setOnClickListener {
+                println("like clicked")
+                listener.onLikeClick(post.postId)
+            }
+            binding.shareButton.setOnClickListener {
+                println("share clicked")
+                listener.onRepostClick(post)
+            }
+            binding.optionsButton.setOnClickListener {
                 popupMenu.show()
                 binding.optionsButton.isChecked = true
             }
-            popupMenu.setOnDismissListener(){
+            popupMenu.setOnDismissListener() {
                 binding.optionsButton.isChecked = false
             }
+
+            binding.video.setOnClickListener {
+                println("video clicked")
+                listener.onVideoLinkClicked(post)
+                }
         }
 
         fun bind(post: Post) {
@@ -85,7 +92,11 @@ class PostAdapter(
                 viewCount.text = Service.peopleCounter(Service.viewCount(post.postId))
                 likesButton.isChecked = Service.likeCounter(post.postId) >= 1
                 shareButton.isChecked = Service.repostCount(post.postId) >= 1
+                if (post.video != null) {
+                    video.visibility = View.VISIBLE
+                }
             }
+
         }
     }
 
