@@ -12,9 +12,7 @@ import ru.netology.nmedia.databinding.IntentHandlerBinding
 import ru.netology.nmedia.databinding.PostContentBinding
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-class PostContentActivity: AppCompatActivity() {
-
-    private val viewModel by viewModels<PostViewModel>()
+class PostContentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,23 +20,25 @@ class PostContentActivity: AppCompatActivity() {
         val binding = PostContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val editText = if(intent.extras != null) {
+
+        val editText: String? = if (intent.extras != null) {
             intent.extras!!.get(RESULT_KEY).toString()
-        } else{
-            ""
+        } else {
+            null
         }
-        binding.edit.setText(editText)
-        binding.edit.requestFocus()
+
+        with(binding.edit) {
+            setText(editText)
+            requestFocus()
+        }
 
         binding.ok.setOnClickListener() {
-            println("ok clicked")
             val intent = Intent()
             val text = binding.edit.text
             if (text.isNullOrBlank()) {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {
                 val content = text.toString()
-                viewModel.onSaveButtonClicked(content)
                 intent.putExtra(RESULT_KEY, content)
                 setResult(Activity.RESULT_OK, intent)
             }
@@ -46,17 +46,21 @@ class PostContentActivity: AppCompatActivity() {
         }
 
         binding.cancel.setOnClickListener() {
-            println("cancel clicked")
-            binding.edit.text.clear()
-            binding.edit.clearFocus()
+            with(binding.edit) {
+                text.clear()
+                clearFocus()
+            }
+            setResult(Activity.RESULT_CANCELED, intent)
             finish()
         }
-
     }
 
-    object ResultContract : ActivityResultContract<Unit, String?>() {
-        override fun createIntent(context: Context, input: Unit): Intent {
-            return Intent(context, PostContentActivity::class.java)
+    object ResultContract : ActivityResultContract<String?, String?>() {
+
+        override fun createIntent(context: Context, input: String?): Intent {
+            val intent = Intent(context, PostContentActivity::class.java)
+            intent.putExtra(RESULT_KEY, input ?:"")
+            return intent
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?) =
