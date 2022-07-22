@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val adapter = PostAdapter(viewModel)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
@@ -47,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_TEXT, postContent)
                 type = "text/plain"
             }
-
             val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
             startActivity(shareIntent)
         }
@@ -56,29 +54,24 @@ class MainActivity : AppCompatActivity() {
             if(video.isNullOrBlank()) return@observe
             val intent = Intent().apply {
                 action = ACTION_VIEW
-                setData(Uri.parse(video))
-                // TODO type = "video" это почему-то не работает :(
-                //  с video/* тоже не работает, открывает фото.
+                data = Uri.parse(video)
             }
             val videoIntent = Intent.createChooser(intent, null)
             startActivity(videoIntent)
         }
 
-        viewModel.editPost.observe(this) { post ->
-            val intent = Intent(this, PostContentActivity::class.java)
-            intent.putExtra(PostContentActivity.RESULT_KEY, post.content)
-            startActivity(intent)
-            setResult(RESULT_OK)
-        }
-
-
         val newPostLauncher = registerForActivityResult(PostContentActivity.ResultContract) { result ->
             result ?: return@registerForActivityResult
+            viewModel.onSaveButtonClicked(result)
+        }
+
+        viewModel.editPost.observe(this) { post ->
+            val stringInExtra = post.content
+            newPostLauncher.launch(stringInExtra)
         }
 
         binding.fab.setOnClickListener() {
-            newPostLauncher.launch(Unit)
+            newPostLauncher.launch(null)
         }
-
     }
 }
