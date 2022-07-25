@@ -12,5 +12,8 @@
     <string name="like" translatable="false">Like</string>
     <string name="share" translatable="false">Share</string>
     <string name="Menu">menu</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="description_post_save">Save</string>
+
 
 </resources>

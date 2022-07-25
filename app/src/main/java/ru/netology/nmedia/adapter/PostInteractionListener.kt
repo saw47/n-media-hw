@@ -4,8 +4,8 @@ import ru.netology.nmedia.data.Post
 
 interface PostInteractionListener {
     fun onLikeClick(id: Long)
-    fun onRepostClick(id: Long)
+    fun onRepostClick(post: Post)
     fun onRemoveClick(id: Long)
     fun onEditClick(post: Post)
-    fun onCancelClick()
+    fun onVideoLinkClicked(post: Post)
 }

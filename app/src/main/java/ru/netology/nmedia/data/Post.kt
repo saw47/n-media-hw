@@ -10,7 +10,8 @@ data class Post(
     val initFavoriteList: Boolean = Service.fillPostFavoriteList(postId),
     var favoriteCounter: Int = 0,
     var repostCounter: Int = 0,
-    var viewCounter: Int = 0
+    var viewCounter: Int = 0,
+    var video: String? = null
     )
 
 

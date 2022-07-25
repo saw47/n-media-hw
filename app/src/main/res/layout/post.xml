@@ -20,8 +20,8 @@
         android:layout_height="@dimen/post_avatar_spacing"
         android:contentDescription="@string/post_author_avatar"
         android:src="@drawable/ic_baseline_face_24"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/headerBarrier"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +64,7 @@
         android:contentDescription="@string/Menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/postAvatarImageView">
+
     </com.google.android.material.button.MaterialButton>
 
     <androidx.constraintlayout.widget.Barrier
@@ -82,14 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        tools:text="В дверной глазок — в замочную щель\n
-Гениальные мыслишки — мировые войнушки\n
-Неофициальные пупы земли\n
-Эмалированные части головных систем\n
-Инстинктивные добровольцы\n
-Во имя вселенной и хлебной корочки\n
-Люди с большой буквы\n
-Слово «люди» пишется с большой буквы\n" />
+        tools:text="В дверной глазок — в замочную щель\n"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/mainTextLink"
@@ -100,11 +94,46 @@
         android:ellipsize="end"
         android:linksClickable="true"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
+        app:layout_constraintBottom_toTopOf="@id/video"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainTextView"
-        tools:text="@string/main_text_link" />
+        tools:text="@string/main_text_link"
+        tools:ignore="NotSibling" />
 
+    <FrameLayout
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
+        app:layout_constraintTop_toBottomOf="@id/mainTextLink"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        >
+
+        <ImageView
+            android:id="@+id/video_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/ic_banner_preview_foreground"
+            android:src="@mipmap/ic_banner_preview_foreground"
+            >
+        </ImageView>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_play_circle_outline_48"
+            android:clickable="false"
+            android:focusable="false"
+            >
+        </androidx.appcompat.widget.AppCompatImageButton>
+
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottomBarrier"
