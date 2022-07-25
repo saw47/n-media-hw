@@ -31,7 +31,7 @@ object Service {
     }
 
 
-
+//TODO здесь фатал
     fun likeCounter(postId: Long): Int {
        return likedPostsRepo[postId]!!.size
     }

@@ -9,7 +9,6 @@ import ru.netology.nmedia.util.Service
 object InMemoryPostRepository : PostRepository {
 
     private const val GENERATED_POSTS_AMOUNT = 1000
-
     private var postCounter = GENERATED_POSTS_AMOUNT.toLong()
 
     private var posts
@@ -34,7 +33,6 @@ object InMemoryPostRepository : PostRepository {
         initPosts[5].video = "https://www.youtube.com/watch?v=NghsA5B2yac"
         data = MutableLiveData(initPosts)
     }
-
 
     var tempPost: Post? = null
 

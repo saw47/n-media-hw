@@ -13,6 +13,8 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.core.content.edit
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.data.Post
@@ -32,8 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PostAdapter(viewModel)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
+//        run {
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            preferences.edit() {
+//                putString("key", "value")
+//            }
+//        }
+//        run {
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            val value = preferences.getString("key", "not value") ?: return@run
+//            Snackbar.make(binding.root, value, Snackbar.LENGTH_INDEFINITE).show()
+//        }
+
         binding.postsRecyclerView.adapter = adapter
 
         viewModel.data.observe(this) { posts ->

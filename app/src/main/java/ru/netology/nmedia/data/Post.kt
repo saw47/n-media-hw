@@ -1,7 +1,10 @@
 package ru.netology.nmedia.data
 
+import kotlinx.serialization.SerialInfo
+import kotlinx.serialization.Serializable
 import ru.netology.nmedia.util.Service
 
+@Serializable
 data class Post(
     val postId: Long = 0,
     val authorName: String,
