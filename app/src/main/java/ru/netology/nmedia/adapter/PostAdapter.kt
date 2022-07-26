@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.data.impl.FilePostRepository.Companion.user
 import ru.netology.nmedia.util.Service
 import ru.netology.nmedia.util.Service.getSimpleDateFormat
 import ru.netology.nmedia.databinding.PostBinding
@@ -25,7 +26,7 @@ class PostAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = getItem(position)
-        Service.setAsView(post.postId)
+        post.viewCounter += 1
         holder.bind(post)
     }
 
@@ -48,7 +49,6 @@ class PostAdapter(
                         }
                         R.id.edit -> {
                             listener.onEditClick(post)
-
                             true
                         }
                         else -> false
@@ -85,18 +85,17 @@ class PostAdapter(
             with(binding) {
                 authorNameTextView.text = post.authorName
                 mainTextView.text = post.content
-                postDateTextView.text = post.getSimpleDateFormat()
+                postDateTextView.text = getSimpleDateFormat()
                 shareButton.text = Service.peopleCounter(post.repostCounter)
                 likesButton.text = Service.peopleCounter(post.favoriteCounter)
                 mainTextLink.text = post.link ?: ""
-                viewCount.text = Service.peopleCounter(Service.viewCount(post.postId))
-                likesButton.isChecked = Service.likeCounter(post.postId) >= 1
-                shareButton.isChecked = Service.repostCount(post.postId) >= 1
+                viewCount.text = Service.peopleCounter(post.viewCounter)
+                likesButton.isChecked = post.favoriteSet.contains(user.userId)
+                shareButton.isChecked = post.repostCounter >= 1
                 if (post.video != null) {
                     video.visibility = View.VISIBLE
                 }
             }
-
         }
     }
 

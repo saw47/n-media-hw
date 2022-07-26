@@ -1,16 +1,10 @@
 package ru.netology.nmedia.viewmodel
 
 import android.app.Application
-import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.Post
-import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.FilePostRepository
-import ru.netology.nmedia.data.impl.InMemoryPostRepository
-import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
 class PostViewModel(
@@ -25,15 +19,16 @@ class PostViewModel(
     val urlContent = SingleLiveEvent<String?>()
     val editPost = SingleLiveEvent<Post>()
 
-    fun onSaveButtonClicked(newContent: String) {
-        if (newContent.isBlank()) return
-        repository.insert(newContent)
+    fun onSaveButtonClicked(newContent: String?, newVideoLink: String?) {
+        if (newContent.isNullOrBlank() && newVideoLink.isNullOrBlank()) return
+        repository.insert(newContent, newVideoLink)
+
     }
 
     override fun onLikeClick(id: Long) = repository.like(id)
 
     override fun onRepostClick(post: Post) {
-        shareContent.value = post.content
+        shareContent.value = post.content ?: return
         repository.repost(post.postId)
     }
 
