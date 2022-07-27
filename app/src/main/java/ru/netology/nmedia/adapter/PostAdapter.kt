@@ -59,11 +59,9 @@ class PostAdapter(
 
         init {
             binding.likesButton.setOnClickListener {
-                println("like clicked")
                 listener.onLikeClick(post.postId)
             }
             binding.shareButton.setOnClickListener {
-                println("share clicked")
                 listener.onRepostClick(post)
             }
             binding.optionsButton.setOnClickListener {
@@ -75,7 +73,6 @@ class PostAdapter(
             }
 
             binding.video.setOnClickListener {
-                println("video clicked")
                 listener.onVideoLinkClicked(post)
                 }
         }
@@ -92,7 +89,7 @@ class PostAdapter(
                 viewCount.text = Service.peopleCounter(post.viewCounter)
                 likesButton.isChecked = post.favoriteSet.contains(user.userId)
                 shareButton.isChecked = post.repostCounter >= 1
-                if (post.video != null) {
+                if (!post.video.isNullOrBlank()) {
                     video.visibility = View.VISIBLE
                 }
             }

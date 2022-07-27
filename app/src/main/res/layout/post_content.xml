@@ -17,12 +17,14 @@
         <EditText
             android:id="@+id/edit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:gravity="start|top"
             android:inputType="textMultiLine"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/editLink"
+            app:layout_constraintTop_toBottomOf="@id/editLink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/insert_text"
+            android:gravity="left|top"
+            android:minHeight="240dp"
             >
 
         </EditText>
@@ -31,11 +33,14 @@
             android:id="@+id/editLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light"
+            android:background="@color/link_field"
             android:hint="@string/insert_link"
             android:inputType="textMultiLine"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit"
+            app:layout_constraintBottom_toTopOf="@id/edit"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="start|top"
+            android:minHeight="48dp"
+
             >
         </EditText>
     </androidx.constraintlayout.widget.ConstraintLayout>

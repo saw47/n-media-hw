@@ -70,13 +70,10 @@ class FilePostRepository(private val application: Application) : PostRepository 
         posts = posts.map { post ->
             if (post.postId == id) {
                 val favorites = if (post.favoriteSet.contains(user.userId)) {
-                    println("minus")
                     post.favoriteSet.minus(user.userId)
                 } else {
-                    println("plus")
                     post.favoriteSet.plus(user.userId)
                 }
-                println("likes = ${favorites.size}")
                 post.copy(
                     favoriteSet = favorites,
                     favoriteCounter = favorites.filter { it == user.userId }.size
@@ -101,10 +98,10 @@ class FilePostRepository(private val application: Application) : PostRepository 
 
     override fun insert(content: String?, videoLink: String?) {
         if (tempPost == null) {
-            val index = lastIndex.getLong(NEXT_ID_PREFS_KEY, 0L)
+            val index = lastIndex.getLong(NEXT_ID_PREFS_KEY, 0L) + 1L
             posts = listOf(
                 Post(
-                    postId = index + 1L,
+                    postId = index,
                     content = content,
                     authorName = "new author",
                     video = videoLink

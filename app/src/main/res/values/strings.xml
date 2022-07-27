@@ -15,5 +15,7 @@
     <string name="chooser_share_post">Share post</string>
     <string name="description_post_save">Save</string>
     <string name="insert_link">Video field - insert link!</string>
+    <string name="insert_text">Text field - insert text!</string>
+
 
 </resources>
