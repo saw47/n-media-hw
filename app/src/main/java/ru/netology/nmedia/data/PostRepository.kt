@@ -7,7 +7,5 @@ interface PostRepository {
     fun like(id: Long)
     fun repost(id: Long)
     fun delete(id: Long)
-    fun insert(content: String)
-   // fun add(post: Post)
-
+    fun insert(content: String?, videoLink: String?)
 }

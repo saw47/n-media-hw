@@ -1,53 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PostContentActivity">
 
-    <EditText
-        android:id="@+id/edit"
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_text_field_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
         >
-    </EditText>
+
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/editLink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/insert_text"
+            android:gravity="left|top"
+            android:minHeight="240dp"
+            >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/editLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/link_field"
+            android:hint="@string/insert_link"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toTopOf="@id/edit"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="start|top"
+            android:minHeight="48dp"
+
+            >
+        </EditText>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         >
+
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
         android:layout_gravity="bottom|right"
+        android:layout_margin="4dp"
         android:text="@string/cancel"
         app:icon="@drawable/ic_baseline_cancel_36"
         tools:ignore="RtlHardcoded">
+
     </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
         android:layout_gravity="bottom|left"
+        android:layout_margin="4dp"
         android:text="@string/description_post_save"
         app:icon="@drawable/ic_baseline_done_outline_24"
-        tools:ignore="RtlHardcoded"
-        >
+        tools:ignore="RtlHardcoded">
+
     </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

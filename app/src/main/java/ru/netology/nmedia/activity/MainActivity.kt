@@ -13,6 +13,8 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.core.content.edit
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.data.Post
@@ -32,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PostAdapter(viewModel)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
         binding.postsRecyclerView.adapter = adapter
 
         viewModel.data.observe(this) { posts ->
@@ -62,12 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         val newPostLauncher = registerForActivityResult(PostContentActivity.ResultContract) { result ->
             result ?: return@registerForActivityResult
-            viewModel.onSaveButtonClicked(result)
+            val newVideoLink = result.getString(PostContentActivity.VIDEO_LINK)
+            val newContent = result.getString(PostContentActivity.CONTENT)
+            viewModel.onSaveButtonClicked(newContent, newVideoLink)
         }
 
         viewModel.editPost.observe(this) { post ->
-            val stringInExtra = post.content
-            newPostLauncher.launch(stringInExtra)
+            newPostLauncher.launch(post)
         }
 
         binding.fab.setOnClickListener() {

@@ -1,16 +1,16 @@
 package ru.netology.nmedia.activity
 
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.os.Binder
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.databinding.IntentHandlerBinding
+import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.databinding.PostContentBinding
-import ru.netology.nmedia.viewmodel.PostViewModel
+import java.util.ArrayList
 
 class PostContentActivity : AppCompatActivity() {
 
@@ -20,56 +20,70 @@ class PostContentActivity : AppCompatActivity() {
         val binding = PostContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bundleIn = intent.getBundleExtra(RESULT_KEY_POST)
 
-        val editText: String? = if (intent.extras != null) {
-            intent.extras!!.get(RESULT_KEY).toString()
-        } else {
-            null
-        }
+        val editText: String? = bundleIn?.getString(CONTENT)
+        val videoLinkText: String? = bundleIn?.getString(VIDEO_LINK)
 
-        with(binding.edit) {
-            setText(editText)
-            requestFocus()
+        with(binding) {
+            edit.setText(editText ?: "")
+            edit.requestFocus()
+            editLink.setText(videoLinkText ?: "")
         }
 
         binding.ok.setOnClickListener() {
             val intent = Intent()
             val text = binding.edit.text
-            if (text.isNullOrBlank()) {
+            val videoLink = binding.editLink.text
+            if (text.isNullOrBlank() && videoLink.isNullOrBlank()) {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {
-                val content = text.toString()
-                intent.putExtra(RESULT_KEY, content)
+                val bundleOut = Bundle()
+                val content: String? = text.toString().ifBlank {
+                    null
+                }
+                val link: String? = videoLink.toString().ifBlank {
+                    null
+                }
+                bundleOut.putString(CONTENT,content)
+                bundleOut.putString(VIDEO_LINK, link)
+                intent.putExtra(RESULT_KEY_POST, bundleOut)
                 setResult(Activity.RESULT_OK, intent)
             }
             finish()
         }
 
         binding.cancel.setOnClickListener() {
-            with(binding.edit) {
-                text.clear()
-                clearFocus()
+            with(binding) {
+                edit.text.clear()
+                edit.clearFocus()
+                editLink.text.clear()
             }
             setResult(Activity.RESULT_CANCELED, intent)
             finish()
         }
     }
 
-    object ResultContract : ActivityResultContract<String?, String?>() {
+    object ResultContract : ActivityResultContract<Post?, Bundle?>() {
 
-        override fun createIntent(context: Context, input: String?): Intent {
+        override fun createIntent(context: Context, input: Post?): Intent {
             val intent = Intent(context, PostContentActivity::class.java)
-            intent.putExtra(RESULT_KEY, input ?:"")
+            val bundle = Bundle()
+            bundle.putString(VIDEO_LINK, input?.video)
+            bundle.putString(CONTENT, input?.content)
+            intent.putExtra(RESULT_KEY_POST, bundle)
             return intent
         }
 
-        override fun parseResult(resultCode: Int, intent: Intent?) =
+        override fun parseResult(resultCode: Int, intent: Intent?): Bundle? =
             if (resultCode == Activity.RESULT_OK) {
-                intent?.getStringExtra(RESULT_KEY)
+                intent?.getBundleExtra(RESULT_KEY_POST)
             } else null
     }
 
     companion object {
-        const val RESULT_KEY = "postNewContent"
+        const val RESULT_KEY_POST = "postNewContent"
+        const val VIDEO_LINK = "link"
+        const val CONTENT = "content"
     }
 }
