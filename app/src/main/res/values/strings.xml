@@ -16,6 +16,9 @@
     <string name="description_post_save">Save</string>
     <string name="insert_link">Video field - insert link!</string>
     <string name="insert_text">Text field - insert text!</string>
+    <string name="video_preview">video preview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

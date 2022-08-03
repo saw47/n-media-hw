@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/feedPostFrame"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:padding="@dimen/common_spacing">
+    android:layout_height="match_parent"
+    android:padding="@dimen/common_spacing"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/topBarrier"
@@ -15,6 +16,7 @@
         android:layout_height="0dp"
         app:barrierDirection="top"
         app:constraint_referenced_ids="authorNameTextView, postAvatarImageView, postDateTextView, optionsButton" />
+
 
     <ImageView
         android:id="@+id/postAvatarImageView"
@@ -76,61 +78,101 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="authorNameTextView, postAvatarImageView, postDateTextView, optionsButton" />
 
-    <android.widget.TextView
-        android:id="@+id/mainTextView"
+    <ScrollView
+        android:id="@+id/scrollableContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_spacing"
-        app:layout_constraintBottom_toTopOf="@id/mainTextLink"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        tools:text="В дверной глазок — в замочную щель\n" />
+
+        >
+
+        <android.widget.TextView
+            android:id="@+id/mainTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            tools:text="HEAD \n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST te
+            END
+
+" />
+
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/mainTextLink"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/common_spacing"
         android:autoLink="web"
         android:ellipsize="end"
         android:linksClickable="true"
         android:singleLine="true"
+        tools:text="@string/main_text_link"
         app:layout_constraintBottom_toTopOf="@id/video"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainTextView"
-        tools:ignore="NotSibling"
-        tools:text="@string/main_text_link" />
+        />
 
-    <FrameLayout
-        android:id="@+id/video"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
-        app:layout_constraintTop_toBottomOf="@id/mainTextLink"
-        tools:visibility="visible">
 
-        <ImageView
-            android:id="@+id/video_preview"
+
+        <FrameLayout
+            android:id="@+id/video"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@mipmap/ic_banner_preview_foreground"
-            android:src="@mipmap/ic_banner_preview_foreground"></ImageView>
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/play_button"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            android:focusable="false"
-            android:src="@drawable/ic_baseline_play_circle_outline_48"></androidx.appcompat.widget.AppCompatImageButton>
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:paddingBottom="@dimen/common_spacing"
+            android:paddingTop="@dimen/common_spacing"
+            app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
+            >
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/video_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/ic_banner_preview_foreground"
+                android:src="@mipmap/ic_banner_preview_foreground"
+                android:contentDescription="@string/video_preview">
+            </ImageView>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:focusable="false"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_play_circle_outline_48"
+                >
+            </androidx.appcompat.widget.AppCompatImageButton>
+
+        </FrameLayout>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottomBarrier"
@@ -138,7 +180,6 @@
         android:layout_height="wrap_content"
         app:barrierDirection="top"
         app:constraint_referenced_ids="likesButton,shareButton,viewButton,viewCount" />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likesButton"
