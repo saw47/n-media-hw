@@ -81,10 +81,11 @@
     <ScrollView
         android:id="@+id/scrollableContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mainTextLink"
 
         >
 
@@ -117,7 +118,36 @@
 
             TEST test TEST test TEST test TEST\n
             TEST test TEST test TEST test TEST\n
-            TEST te
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
+            TEST test TEST test TEST test TEST\n
             END
 
 " />
@@ -134,6 +164,7 @@
         android:singleLine="true"
         tools:text="@string/main_text_link"
         app:layout_constraintBottom_toTopOf="@id/video"
+        app:layout_constraintTop_toBottomOf="@id/scrollableContainer"
         />
 
 

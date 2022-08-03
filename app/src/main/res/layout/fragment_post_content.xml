@@ -40,7 +40,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="start|top"
             android:minHeight="48dp"
-
             >
         </EditText>
     </androidx.constraintlayout.widget.ConstraintLayout>
