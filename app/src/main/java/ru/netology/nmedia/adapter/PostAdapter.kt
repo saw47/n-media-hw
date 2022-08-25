@@ -58,16 +58,23 @@ class PostAdapter(
         }
 
         init {
-            binding.likesButton.setOnClickListener {
-                listener.onLikeClick(post.postId)
+            binding.feedPostFrame.setOnClickListener{
+                listener.onFrameClick(post)
             }
+
+            binding.likesButton.setOnClickListener {
+                listener.onLikeClick(post)
+            }
+
             binding.shareButton.setOnClickListener {
                 listener.onRepostClick(post)
             }
+
             binding.optionsButton.setOnClickListener {
                 popupMenu.show()
                 binding.optionsButton.isChecked = true
             }
+
             popupMenu.setOnDismissListener() {
                 binding.optionsButton.isChecked = false
             }

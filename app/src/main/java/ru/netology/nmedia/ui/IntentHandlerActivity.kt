@@ -1,10 +1,8 @@
-package ru.netology.nmedia.activity
+package ru.netology.nmedia.ui
 
 import android.os.Bundle
 import android.content.Intent
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.databinding.IntentHandlerBinding
